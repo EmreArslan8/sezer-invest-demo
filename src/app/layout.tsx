@@ -1,47 +1,20 @@
 import type { Metadata } from "next";
-import { Manrope, Playfair_Display } from "next/font/google";
-import Header from "@/components/Header";
-import Footer from "@/components/Footer";
-import WhatsAppButton from "@/components/WhatsAppButton";
-import { site } from "@/lib/site";
+import { Poppins } from "next/font/google";
 import "./globals.css";
 
-const manrope = Manrope({
-  variable: "--font-manrope",
-  subsets: ["latin", "latin-ext"],
-});
-
-const playfair = Playfair_Display({
-  variable: "--font-playfair",
-  subsets: ["latin", "latin-ext"],
-});
+const poppins = Poppins({ subsets: ["latin", "latin-ext"], weight: ["400", "500", "600", "700"], variable: "--font-poppins" });
 
 export const metadata: Metadata = {
-  metadataBase: new URL(site.url),
-  title: {
-    default: `${site.name} | Gayrimenkul Alım, Satım, Kiralama ve Mülk Yönetimi`,
-    template: `%s | ${site.name}`,
-  },
-  description: site.description,
-  openGraph: {
-    type: "website",
-    locale: "tr_TR",
-    siteName: site.name,
-  },
+  title: "Sezer Invest – Profesyonel Emlak Danışmanlığı",
+  description:
+    "Kağıthane merkezli Sezer Invest: kiralık ve satılık gayrimenkul, mülk ve kiracı yönetimi, ofis kiralama ve ücretsiz ekspertiz.",
+  icons: { icon: "/media/brand/logo.png" },
 };
 
-export default function RootLayout({ children }: LayoutProps<"/">) {
+export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
   return (
-    <html
-      lang="tr"
-      className={`${manrope.variable} ${playfair.variable} h-full antialiased`}
-    >
-      <body className="flex min-h-full flex-col font-sans">
-        <Header />
-        <main className="flex-1">{children}</main>
-        <Footer />
-        <WhatsAppButton />
-      </body>
+    <html lang="tr" className={poppins.variable}>
+      <body>{children}</body>
     </html>
   );
 }
